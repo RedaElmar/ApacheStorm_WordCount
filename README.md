@@ -1,7 +1,5 @@
 # ApacheStorm_WordCount_TP
 
-# Create an Apache Storm topology in Java
-
 Learn how to create a Java-based topology for Apache Storm. You create a Storm topology that implements a word-count application. You use Apache Maven to build and package the project. Then, you learn how to define the topology using the Apache Storm Flux framework.
 
 After completing the steps in this document, you can deploy the topology to Apache Storm on HDInsight.
@@ -289,12 +287,6 @@ public class RandomSentenceSpout extends BaseRichSpout {
 }
 ```
 
-> [!NOTE]  
-> For an example of a spout that reads from an external data source, see one of the following examples:
->
-> * [TwitterSampleSPout](https://github.com/apache/storm/blob/0.10.x-branch/examples/storm-starter/src/jvm/storm/starter/spout/TwitterSampleSpout.java): An example spout that reads from Twitter.
-> * [Storm-Kafka](https://github.com/apache/storm/tree/0.10.x-branch/external/storm-kafka): A spout that reads from Kafka.
-
 ### Create the bolts
 
 Bolts handle the data processing. Bolts can do anything, for example, computation, persistence, or talking to external components. This topology uses two bolts:
@@ -457,7 +449,7 @@ The topology ties the spouts and bolts together into a graph. The graph defines 
 
 The following image is a basic diagram of the graph of components for this topology.
 
-![diagram showing the spouts and bolts arrangement](./media/apache-storm-develop-java-topology/word-count-topology1.png)
+![diagram showing the spouts and bolts arrangement](./src/main/java/stormTopology/TP/word-count.png)
 
 To implement the topology, enter the command below to create and open a new file `WordCountTopology.java`:
 
@@ -561,11 +553,6 @@ Then copy and paste the XML text below into the new file.  Then close the file.
 This XML configures a new logger for the `stormTopology.TP` class, which includes the components in this example topology. The level is set to trace for this logger, which captures any logging information emitted by components in this topology.
 
 The `<Root level="error">` section configures the root level of logging (everything not in `stormTopology.TP`) to only log error information.
-
-For more information on configuring logging for Log4j 2, see [https://logging.apache.org/log4j/2.x/manual/configuration.html](https://logging.apache.org/log4j/2.x/manual/configuration.html).
-
-> [!NOTE]  
-> Storm version 0.10.0 and higher use Log4j 2.x. Older versions of storm used Log4j 1.x, which used a different format for log configuration. For information on the older configuration, see [https://cwiki.apache.org/confluence/display/LOGGINGLOG4J/Log4jXmlFormat](https://cwiki.apache.org/confluence/display/LOGGINGLOG4J/Log4jXmlFormat).
 
 ## Test the topology locally
 
