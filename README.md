@@ -18,7 +18,7 @@ After completing the steps in this document, you can deploy the topology to Apac
 Enter the following command to create a Maven project named **WordCount**:
 
 ```cmd
-mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DgroupId=com.microsoft.example -DartifactId=WordCount -DinteractiveMode=false
+mvn archetype:generate -DarchetypeArtifactId=maven-archetype-quickstart -DgroupId=stormTopology.TP -DartifactId=WordCount -DinteractiveMode=false
 
 cd WordCount
 mkdir resources
@@ -27,16 +27,16 @@ mkdir resources
 This command creates a directory named `WordCount` at the current location, which contains a basic Maven project. The second command changes the present working directory to `WordCount`. The third command creates a new directory, `resources`, which will be used later.  The `WordCount` directory contains the following items:
 
 * `pom.xml`: Contains settings for the Maven project.
-* `src\main\java\com\microsoft\example`: Contains your application code.
-* `src\test\java\com\microsoft\example`: Contains tests for your application.  
+* `src\main\java\stormTopology\TP`: Contains your application code.
+* `src\test\java\stormTopology\TP`: Contains tests for your application.  
 
 ### Remove the generated example code
 
 Delete the generated test and application files `AppTest.java`, and `App.java` by entering the commands below:
 
 ```cmd
-DEL src\main\java\com\microsoft\example\App.java
-DEL src\test\java\com\microsoft\example\AppTest.java
+DEL src\main\java\stormTopology\TP\App.java
+DEL src\test\java\stormTopology\TP\AppTest.java
 ```
 
 ## Add Maven repositories
@@ -222,13 +222,13 @@ To reduce requirements for setting up external data sources, the following spout
 Enter the command below to create and open a new file `RandomSentenceSpout.java`:
 
 ```cmd
-notepad src\main\java\com\microsoft\example\RandomSentenceSpout.java
+notepad src\main\java\stormTopology\TP\RandomSentenceSpout.java
 ```
 
 Then copy and paste the java code below into the new file.  Then close the file.
 
 ```java
-package com.microsoft.example;
+package stormTopology.TP;
 
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
@@ -308,13 +308,13 @@ Bolts handle the data processing. Bolts can do anything, for example, computatio
 Enter the command below to create and open a new file `SplitSentence.java`:
 
 ```cmd
-notepad src\main\java\com\microsoft\example\SplitSentence.java
+notepad src\main\java\stormTopology\TP\SplitSentence.java
 ```
 
 Then copy and paste the java code below into the new file.  Then close the file.
 
 ```java
-package com.microsoft.example;
+package stormTopology.TP;
 
 import java.text.BreakIterator;
 
@@ -365,13 +365,13 @@ public class SplitSentence extends BaseBasicBolt {
 Enter the command below to create and open a new file `WordCount.java`:
 
 ```cmd
-notepad src\main\java\com\microsoft\example\WordCount.java
+notepad src\main\java\stormTopology\TP\WordCount.java
 ```
 
 Then copy and paste the java code below into the new file.  Then close the file.
 
 ```java
-package com.microsoft.example;
+package stormTopology.TP;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -462,13 +462,13 @@ The following image is a basic diagram of the graph of components for this topol
 To implement the topology, enter the command below to create and open a new file `WordCountTopology.java`:
 
 ```cmd
-notepad src\main\java\com\microsoft\example\WordCountTopology.java
+notepad src\main\java\stormTopology\TP\WordCountTopology.java
 ```
 
 Then copy and paste the java code below into the new file.  Then close the file.
 
 ```java
-package com.microsoft.example;
+package stormTopology.TP;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
@@ -476,7 +476,7 @@ import org.apache.storm.StormSubmitter;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.tuple.Fields;
 
-import com.microsoft.example.RandomSentenceSpout;
+import stormTopology.TP.RandomSentenceSpout;
 
 public class WordCountTopology {
 
@@ -548,7 +548,7 @@ Then copy and paste the XML text below into the new file.  Then close the file.
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.microsoft.example" level="trace" additivity="false">
+        <Logger name="stormTopology.TP" level="trace" additivity="false">
             <AppenderRef ref="STDOUT"/>
         </Logger>
         <Root level="error">
@@ -558,9 +558,9 @@ Then copy and paste the XML text below into the new file.  Then close the file.
 </Configuration>
 ```
 
-This XML configures a new logger for the `com.microsoft.example` class, which includes the components in this example topology. The level is set to trace for this logger, which captures any logging information emitted by components in this topology.
+This XML configures a new logger for the `stormTopology.TP` class, which includes the components in this example topology. The level is set to trace for this logger, which captures any logging information emitted by components in this topology.
 
-The `<Root level="error">` section configures the root level of logging (everything not in `com.microsoft.example`) to only log error information.
+The `<Root level="error">` section configures the root level of logging (everything not in `stormTopology.TP`) to only log error information.
 
 For more information on configuring logging for Log4j 2, see [https://logging.apache.org/log4j/2.x/manual/configuration.html](https://logging.apache.org/log4j/2.x/manual/configuration.html).
 
@@ -572,19 +572,19 @@ For more information on configuring logging for Log4j 2, see [https://logging.ap
 After you save the files, use the following command to test the topology locally.
 
 ```cmd
-mvn compile exec:java -Dstorm.topology=com.microsoft.example.WordCountTopology
+mvn compile exec:java -Dstorm.topology=stormTopology.TP.WordCountTopology
 ```
 
 As it runs, the topology displays startup information. The following text is an example of the word count output:
 
 ```output
-17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word snow
-17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word white
-17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 112 for word seven
-17:33:27 [Thread-16-count] INFO  com.microsoft.example.WordCount - Emitting a count of 195 for word the
-17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 113 for word and
-17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word dwarfs
-17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word snow
+17:33:27 [Thread-12-count] INFO  stormTopology.TP.WordCount - Emitting a count of 56 for word snow
+17:33:27 [Thread-12-count] INFO  stormTopology.TP.WordCount - Emitting a count of 56 for word white
+17:33:27 [Thread-12-count] INFO  stormTopology.TP.WordCount - Emitting a count of 112 for word seven
+17:33:27 [Thread-16-count] INFO  stormTopology.TP.WordCount - Emitting a count of 195 for word the
+17:33:27 [Thread-30-count] INFO  stormTopology.TP.WordCount - Emitting a count of 113 for word and
+17:33:27 [Thread-30-count] INFO  stormTopology.TP.WordCount - Emitting a count of 57 for word dwarfs
+17:33:27 [Thread-12-count] INFO  stormTopology.TP.WordCount - Emitting a count of 57 for word snow
 ```
 
 This example log indicates that the word 'and' has been emitted 113 times. The count continues to increase as long as the topology runs. This increase is because the spout continuously emits the same sentences.
