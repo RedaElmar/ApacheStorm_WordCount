@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>stormTopology</groupId>
+  <artifactId>TP</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>TP</name>
+  <!-- FIXME change it to the project's website -->
+<url>http://www.example.com</url>
+<repositories>
+    <repository>
+        <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>never</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+        </snapshots>
+        <id>HDPReleases</id>
+        <name>HDP Releases</name>
+        <url>https://repo.hortonworks.com/content/repositories/releases/</url>
+        <layout>default</layout>
+    </repository>
+    <repository>
+        <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>never</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+        </snapshots>
+        <id>HDPJetty</id>
+        <name>Hadoop Jetty</name>
+        <url>https://repo.hortonworks.com/content/repositories/jetty-hadoop/</url>
+        <layout>default</layout>
+    </repository>
+</repositories>
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!--
+    This is a version of Storm from the Hortonworks repository that is compatible with HDInsight 3.6.
+    -->
+    <storm.version>2.2.0</storm.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+ </properties>
+
+  <dependencies>
+<dependency>
+    <groupId>org.apache.storm</groupId>
+    <artifactId>storm-core</artifactId>
+    <version>${storm.version}</version>
+    <!-- keep storm out of the jar-with-dependencies -->
+    <scope>provided</scope>
+</dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+    <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.6.0</version>
+    
+    <executions>
+        <execution>
+            <goals>
+                <goal>exec</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <executable>java</executable>
+        <includeProjectDependencies>true</includeProjectDependencies>
+        <includePluginDependencies>false</includePluginDependencies>
+        <classpathScope>compile</classpathScope>
+        <mainClass>${storm.topology}</mainClass>
+        <cleanupDaemonThreads>false</cleanupDaemonThreads>
+    </configuration>
+</plugin>
+
+    <plugin>
+    	<groupId>org.apache.maven.plugins</groupId>
+    	<artifactId>maven-compiler-plugin</artifactId>
+    	<version>3.8.1</version>
+    	<configuration>
+    		<source>1.8</source>
+    		<target>1.8</target>
+  		</configuration>
+	</plugin>
+    </plugins>
+    <resources>
+    <resource>
+    <directory>/home/red/eclipse-workspacetp/resources</directory>
+    <filtering>false</filtering>
+    <includes>
+            <include>log4j2.xml</include>
+    </includes>
+</resource>
+    </resources>
+</build>
+</project>
