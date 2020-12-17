@@ -6,25 +6,12 @@ Learn how to create a Java-based topology for Apache Storm. You create a Storm t
 
 After completing the steps in this document, you can deploy the topology to Apache Storm on HDInsight.
 
-> [!NOTE]  
-> A completed version of the Storm topology examples created in this document is available at [https://github.com/Azure-Samples/hdinsight-java-storm-wordcount](https://github.com/Azure-Samples/hdinsight-java-storm-wordcount).
-
 ## Prerequisites
 
 * [Java Developer Kit (JDK) version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support)
 
 * [Apache Maven](https://maven.apache.org/download.cgi) properly [installed](https://maven.apache.org/install.html) according to Apache.  Maven is a project build system for Java projects.
 
-## Test environment
-
-The environment used for this article was a computer running Windows 10.  The commands were executed in a command prompt, and the various files were edited with Notepad.
-
-From a command prompt, enter the commands below to create a working environment:
-
-```cmd
-mkdir C:\HDI
-cd C:\HDI
-```
 
 ## Create a Maven project
 
