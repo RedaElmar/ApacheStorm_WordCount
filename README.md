@@ -1,4 +1,5 @@
-# ApacheStorm_WordCount_TP
+# ApacheStorm WordCount TP
+<img align="right" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Storm_logo.png" alt="logo" width="500"/>
 
 Learn how to create a Java-based topology for Apache Storm. You create a Storm topology that implements a word-count application. You use Apache Maven to build and package the project. Then, you learn how to define the topology using the Apache Storm Flux framework.
 
